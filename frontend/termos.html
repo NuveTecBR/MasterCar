@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Garantia CDC, Orçamento Prévio & LGPD — MasterCar Oficina</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;600&family=Dosis:wght@600;700;800&family=JetBrains+Mono:wght@600;700&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para termos e direitos LGPD</a>
+  <div id="sidebar-mount"></div>
+
+  <div class="app-main-wrapper">
+    <main id="conteudo-principal" class="content-container">
+      <h1 style="font-size: 2.2rem; font-weight: 800; margin-bottom: 12px;">
+        Transparência Técnica, Orçamento Prévio (Art. 40 CDC) & Canal LGPD
+      </h1>
+      <p style="font-family: var(--font-serif); color: var(--text-body); max-width: 72ch; margin-bottom: 28px;">
+        Compromisso com o Código de Defesa do Consumidor e proteção integral dos dados dos proprietários de veículos.
+      </p>
+
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 20px;">
+        <article class="service-card">
+          <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 8px;">1. Orçamento Prévio Obrigatório (Art. 40 CDC)</h2>
+          <p class="service-desc">
+            Nenhum serviço ou substituição de peça é executado sem aprovação prévia e expressa do consumidor, discriminando mão de obra, marca das peças genuínas/homologadas e prazo de entrega.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 8px;">2. Garantia Legal e Contratual</h2>
+          <p class="service-desc">
+            Todos os serviços contam com 90 dias de garantia legal incondicional (Art. 26, II do CDC) mais garantia estendida da oficina de até 12 meses conforme certificado na Ordem de Serviço.
+          </p>
+        </article>
+
+        <article class="service-card">
+          <h2 style="font-size: 1.3rem; font-weight: 800; margin-bottom: 8px;">3. Canal de Direitos do Titular LGPD</h2>
+          <form id="form-lgpd-mastercar" novalidate>
+            <div class="form-group">
+              <label for="lgpd-nome" class="form-label">Nome Completo *</label>
+              <input type="text" id="lgpd-nome" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="lgpd-email" class="form-label">E-mail *</label>
+              <input type="email" id="lgpd-email" class="form-input" required>
+            </div>
+            <div class="form-group">
+              <label for="lgpd-tipo" class="form-label">Direito Solicitado</label>
+              <select id="lgpd-tipo" class="form-select">
+                <option value="Confirmacao">Confirmar tratamento de dados</option>
+                <option value="Acesso">Cópia de dados de OS e cadastro</option>
+                <option value="Exclusao">Exclusão e revogação de consentimento</option>
+              </select>
+            </div>
+            <div id="lgpd-fb" aria-live="polite" style="margin-bottom: 10px;"></div>
+            <button type="submit" class="btn btn-primary" style="width: 100%;">Enviar ao DPO</button>
+          </form>
+        </article>
+      </div>
+    </main>
+
+    <footer class="site-footer">
+      <div class="content-container" style="padding: 0;">
+        <div class="fictional-box">
+          <strong>⚠️ AVISO DE DEMONSTRAÇÃO DE PORTFÓLIO (DADOS FICTÍCIOS)</strong>
+          <p>Este site é uma demonstração tecnológica desenvolvida pela Nuvetec. Todos os dados empresariais, placas e serviços são fictícios.</p>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="/js/sidebar.js"></script>
+  <script type="module" src="/js/termos.js"></script>
+</body>
+</html>

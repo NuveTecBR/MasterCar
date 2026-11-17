@@ -1,0 +1,721 @@
+/* ============================================================================
+   MASTERCAR OFICINA & DIAGNÓSTICO — DESIGN SYSTEM (MÉTODO PARC & GLASS SIDE BAR)
+   Layout 02/05: Sidebar Retrátil Inteligente (72px/270px) + Dual-Theme + Split Login
+   Tipografia Oficial: Dosis (800) + Domine (400/600) + JetBrains Mono
+   ============================================================================ */
+
+:root {
+  --bg-base: #0B0F19;
+  --bg-surface: #131B2E;
+  --bg-card: rgba(22, 30, 48, 0.78);
+  --bg-card-solid: #161E30;
+  --border-glass: rgba(255, 255, 255, 0.14);
+  --border-strong: rgba(56, 189, 248, 0.45);
+
+  --text-main: #F8FAFC;
+  --text-body: #E2E8F0;
+  --text-muted: #94A3B8; /* Contraste WCAG AA sobre #0B0F19 */
+
+  --primary: #EA580C;       /* Laranja Torque Quente (Contraste PARC) */
+  --primary-hover: #C2410C;
+  --accent-obd: #38BDF8;    /* Azul Scanner OBD2 */
+  --success: #22C55E;
+  --success-bg: rgba(34, 197, 94, 0.16);
+  --warning: #FACC15;
+  --danger: #F87171;
+
+  --glass-blur: blur(20px) saturate(180%);
+  --shadow-glass: 0 12px 32px rgba(0, 0, 0, 0.42);
+  --radius-sm: 10px;
+  --radius-md: 16px;
+  --radius-lg: 22px;
+
+  --font-title: 'Dosis', system-ui, -apple-system, sans-serif;
+  --font-serif: 'Domine', Georgia, serif;
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+[data-theme="light"] {
+  --bg-base: #F1F5F9;
+  --bg-surface: #FFFFFF;
+  --bg-card: rgba(255, 255, 255, 0.90);
+  --bg-card-solid: #FFFFFF;
+  --border-glass: rgba(15, 23, 42, 0.12);
+  --border-strong: #0284C7;
+
+  --text-main: #0F172A;
+  --text-body: #1E293B;
+  --text-muted: #475569;
+
+  --primary: #C2410C;
+  --primary-hover: #9A3412;
+  --accent-obd: #0284C7;
+  --success: #15803D;
+  --success-bg: #DCFCE7;
+  --danger: #B91C1C;
+  --shadow-glass: 0 8px 24px rgba(15, 23, 42, 0.08);
+}
+
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  background-color: var(--bg-base);
+  color: var(--text-main);
+  font-family: var(--font-title);
+  line-height: 1.6;
+  overflow-x: hidden;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+/* Acessibilidade: Skip Link & Focus Visible */
+.skip-link {
+  position: absolute;
+  top: -100px;
+  left: 90px;
+  background: var(--primary);
+  color: #FFFFFF;
+  padding: 12px 20px;
+  border-radius: var(--radius-sm);
+  font-weight: 800;
+  z-index: 9999;
+  text-decoration: none;
+}
+
+.skip-link:focus {
+  top: 16px;
+}
+
+:focus-visible {
+  outline: 3px solid var(--accent-obd) !important;
+  outline-offset: 3px !important;
+}
+
+/* ============================================================================
+   GLASS SIDE BAR RETRÁTIL INTELIGENTE (72px -> 270px no Hover ou Pin)
+   ============================================================================ */
+.glass-sidebar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  width: 88px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  border-right: 1.5px solid var(--border-glass);
+  z-index: 500;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  padding: 18px 10px;
+  transition: width 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+  overflow: hidden;
+  box-shadow: var(--shadow-glass);
+}
+
+.glass-sidebar:hover,
+.glass-sidebar.is-pinned {
+  width: 260px;
+}
+
+.sidebar-top {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px;
+  padding: 0 4px 18px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.sidebar-brand {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  text-decoration: none;
+  color: var(--text-main);
+  white-space: nowrap;
+}
+
+.sidebar-logo-badge {
+  width: 44px;
+  height: 44px;
+  min-width: 44px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--primary), #9A3412);
+  color: #FFFFFF;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 800;
+  font-size: 1.25rem;
+}
+
+.sidebar-brand-title {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.glass-sidebar:hover .sidebar-brand-title,
+.glass-sidebar.is-pinned .sidebar-brand-title {
+  opacity: 1;
+}
+
+.sidebar-pin-btn {
+  background: transparent;
+  border: 1px solid var(--border-glass);
+  color: var(--text-main);
+  width: 36px;
+  height: 36px;
+  min-width: 36px;
+  border-radius: 8px;
+  cursor: pointer;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.glass-sidebar:hover .sidebar-pin-btn,
+.glass-sidebar.is-pinned .sidebar-pin-btn {
+  opacity: 1;
+}
+
+.sidebar-nav {
+  list-style: none;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  flex: 1;
+}
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  min-height: 46px;
+  padding: 10px 12px;
+  border-radius: var(--radius-sm);
+  color: var(--text-body);
+  text-decoration: none;
+  font-weight: 700;
+  font-size: 1.05rem;
+  white-space: nowrap;
+  transition: background 0.15s ease, color 0.15s ease;
+}
+
+.sidebar-link:hover,
+.sidebar-link.active {
+  background: rgba(234, 88, 12, 0.18);
+  color: var(--text-main);
+  border-left: 3px solid var(--primary);
+}
+
+.sidebar-icon {
+  font-size: 1.25rem;
+  width: 42px;
+  height: 42px;
+  min-width: 42px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(234, 88, 12, 0.08);
+  border-radius: 12px;
+  transition: all 0.2s ease;
+}
+
+.sidebar-link:hover .sidebar-icon,
+.sidebar-link.active .sidebar-icon {
+  background: rgba(234, 88, 12, 0.22);
+  transform: scale(1.05);
+}
+
+.sidebar-label {
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+
+.glass-sidebar:hover .sidebar-label,
+.glass-sidebar.is-pinned .sidebar-label {
+  opacity: 1;
+}
+
+.sidebar-bottom {
+  border-top: 1px solid var(--border-glass);
+  padding-top: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+/* Wrapper Principal que acompanha a Sidebar */
+.app-main-wrapper {
+  margin-left: 88px;
+  min-height: 100vh;
+  transition: margin-left 0.28s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+body.sidebar-pinned .app-main-wrapper {
+  margin-left: 260px;
+}
+
+.content-container {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 28px 28px 80px;
+}
+
+/* Botões e Controles */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  min-height: 46px;
+  padding: 10px 22px;
+  border-radius: var(--radius-sm);
+  font-family: var(--font-title);
+  font-weight: 800;
+  font-size: 1.02rem;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  cursor: pointer;
+  border: 1.5px solid transparent;
+  transition: all 0.15s ease;
+}
+
+.btn-primary {
+  background: var(--primary);
+  color: #FFFFFF;
+}
+
+.btn-primary:hover {
+  background: var(--primary-hover);
+}
+
+.btn-sos {
+  background: #DC2626;
+  color: #FFFFFF;
+  box-shadow: 0 4px 16px rgba(220, 38, 38, 0.35);
+}
+
+.btn-outline {
+  background: transparent;
+  color: var(--text-main);
+  border-color: var(--border-glass);
+}
+
+.btn-outline:hover {
+  border-color: var(--accent-obd);
+}
+
+/* Rastreador Ao Vivo de Ordem de Serviço por Placa (Hero Interativo) */
+.os-tracker-hero {
+  display: grid;
+  grid-template-columns: 1.25fr 1fr;
+  gap: 28px;
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 38px;
+  margin-bottom: 44px;
+  box-shadow: var(--shadow-glass);
+}
+
+.hero-tag-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(56, 189, 248, 0.15);
+  color: var(--accent-obd);
+  border: 1px solid var(--border-strong);
+  padding: 5px 14px;
+  border-radius: 999px;
+  font-weight: 800;
+  font-size: 0.85rem;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 16px;
+}
+
+.hero-main-title {
+  font-size: clamp(2.1rem, 3.6vw, 3.2rem);
+  font-weight: 800;
+  line-height: 1.08;
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.hero-serif-desc {
+  font-family: var(--font-serif);
+  font-size: 1rem;
+  color: var(--text-body);
+  margin-bottom: 24px;
+  max-width: 60ch;
+  text-align: left;
+}
+
+/* Card da Placa Mercosul & Status da OS */
+.tracker-panel {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  text-align: left;
+}
+
+.mercosul-input-row {
+  display: flex;
+  gap: 10px;
+  margin-top: 8px;
+  margin-bottom: 12px;
+}
+
+.mercosul-plate-input {
+  flex: 1;
+  min-height: 48px;
+  padding: 10px 16px;
+  font-family: var(--font-mono);
+  font-size: 1.2rem;
+  font-weight: 800;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  border-radius: var(--radius-sm);
+  border: 2px solid var(--border-strong);
+  background: var(--bg-base);
+  color: var(--text-main);
+}
+
+.demo-plates-bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.plate-chip {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 4px 10px;
+  border-radius: 6px;
+  background: rgba(56, 189, 248, 0.14);
+  color: var(--accent-obd);
+  border: 1px solid var(--border-strong);
+  cursor: pointer;
+}
+
+.os-progress-track {
+  width: 100%;
+  height: 12px;
+  background: rgba(148, 163, 184, 0.2);
+  border-radius: 999px;
+  overflow: hidden;
+  margin: 12px 0;
+}
+
+.os-progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, var(--primary), var(--success));
+  transition: width 0.35s ease;
+}
+
+/* Grade de Serviços e Calculadora Preventiva */
+.services-layout {
+  display: grid;
+  grid-template-columns: 1fr 370px;
+  gap: 28px;
+  align-items: start;
+}
+
+.category-pills {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  margin-bottom: 24px;
+}
+
+.cat-pill {
+  min-height: 42px;
+  padding: 8px 16px;
+  border-radius: 999px;
+  border: 1.5px solid var(--border-glass);
+  background: var(--bg-surface);
+  color: var(--text-body);
+  font-family: var(--font-title);
+  font-weight: 700;
+  font-size: 0.95rem;
+  cursor: pointer;
+}
+
+.cat-pill.active, .cat-pill:hover {
+  background: var(--primary);
+  color: #FFFFFF;
+  border-color: var(--primary);
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
+  gap: 20px;
+}
+
+.service-card {
+  background: var(--bg-card);
+  backdrop-filter: var(--glass-blur);
+  border: 1.5px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  box-shadow: var(--shadow-glass);
+}
+
+.service-code {
+  font-family: var(--font-mono);
+  font-size: 0.78rem;
+  color: var(--accent-obd);
+  font-weight: 700;
+}
+
+.service-title {
+  font-size: 1.35rem;
+  font-weight: 800;
+  margin: 6px 0 10px;
+  line-height: 1.2;
+}
+
+.service-desc {
+  font-family: var(--font-serif);
+  font-size: 0.9rem;
+  color: var(--text-body);
+  margin-bottom: 14px;
+}
+
+.service-footer {
+  margin-top: auto;
+  padding-top: 14px;
+  border-top: 1px solid var(--border-glass);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+/* Painel Lateral de Agendamento & Calculadora por Porte */
+.booking-sticky-card {
+  background: var(--bg-surface);
+  border: 1.5px solid var(--border-strong);
+  border-radius: var(--radius-lg);
+  padding: 26px;
+  position: sticky;
+  top: 24px;
+  text-align: left;
+  box-shadow: var(--shadow-glass);
+}
+
+.form-group {
+  margin-bottom: 16px;
+  text-align: left;
+}
+
+.form-label {
+  display: block;
+  font-weight: 700;
+  font-size: 0.92rem;
+  margin-bottom: 4px;
+}
+
+.form-input, .form-select, .form-textarea {
+  width: 100%;
+  min-height: 44px;
+  padding: 10px 14px;
+  border-radius: var(--radius-sm);
+  border: 1.5px solid var(--border-glass);
+  background: var(--bg-base);
+  color: var(--text-main);
+  font-family: var(--font-title);
+  font-size: 1rem;
+}
+
+/* Split-Screen Login (Padrão Fuzzy/Avada para painel.html) */
+.split-login-wrapper {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1.5px solid var(--border-glass);
+  box-shadow: var(--shadow-glass);
+  margin: 20px 0;
+}
+
+.login-brand-showcase {
+  background: linear-gradient(135deg, #1E293B 0%, #0F172A 60%, #7C2D12 100%);
+  color: #FFFFFF;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  text-align: left;
+}
+
+.login-form-panel {
+  background: var(--bg-surface);
+  padding: 48px;
+  text-align: left;
+}
+
+/* Rodapé com Aviso de Dados Fictícios */
+.site-footer {
+  background: var(--bg-surface);
+  border-top: 3px solid var(--primary);
+  padding: 48px 28px 32px;
+  margin-top: 64px;
+}
+
+.fictional-box {
+  background: rgba(234, 88, 12, 0.14);
+  border: 1.5px solid var(--primary);
+  border-radius: var(--radius-md);
+  padding: 18px 22px;
+  margin-bottom: 28px;
+  text-align: left;
+}
+
+.footer-cols {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 28px;
+  text-align: left;
+}
+
+.skeleton-card {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  height: 240px;
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.skeleton-line {
+  background: linear-gradient(90deg, rgba(148,163,184,0.12) 25%, rgba(148,163,184,0.28) 50%, rgba(148,163,184,0.12) 75%);
+  background-size: 200% 100%;
+  animation: shimmerMc 1.4s infinite linear;
+  border-radius: 6px;
+}
+
+@keyframes shimmerMc {
+  0% { background-position: 200% 0; }
+  100% { background-position: -200% 0; }
+}
+
+/* ====================================================================
+   FAIXA DE CONFIANÇA AVADA (TRUST STRIP 4 PILARES)
+==================================================================== */
+.avada-trust-strip {
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  padding: 24px 32px;
+  margin: 40px 0 64px;
+  box-shadow: var(--shadow-glass);
+}
+
+.trust-strip-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  align-items: center;
+}
+
+.trust-strip-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.trust-strip-icon {
+  width: 46px;
+  height: 46px;
+  min-width: 46px;
+  border-radius: 12px;
+  background: rgba(234, 88, 12, 0.12);
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.35rem;
+}
+
+.trust-strip-content {
+  display: flex;
+  flex-direction: column;
+}
+
+.trust-strip-content strong {
+  font-family: var(--font-title);
+  font-size: 0.95rem;
+  font-weight: 800;
+  color: var(--text-main);
+  line-height: 1.25;
+}
+
+.trust-strip-content span {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  line-height: 1.3;
+}
+
+@media (max-width: 980px) {
+  .trust-strip-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 580px) {
+  .trust-strip-grid {
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+}
+
+@media (max-width: 980px) {
+  .os-tracker-hero,
+  .services-layout,
+  .split-login-wrapper,
+  .footer-cols {
+    grid-template-columns: 1fr;
+  }
+  .booking-sticky-card {
+    position: static;
+  }
+}
+
+@media (max-width: 768px) {
+  .glass-sidebar {
+    position: static;
+    width: 100% !important;
+    height: auto;
+    border-right: none;
+    border-bottom: 1.5px solid var(--border-glass);
+  }
+  .sidebar-brand-title,
+  .sidebar-label {
+    opacity: 1 !important;
+  }
+  .sidebar-nav {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
+  .app-main-wrapper,
+  body.sidebar-pinned .app-main-wrapper {
+    margin-left: 0 !important;
+  }
+}

@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="pt-BR" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="MasterCar Oficina & Diagnóstico Avançado — Rastreador de Ordem de Serviço por Placa, Revisão Preventiva e Socorro Guincho. Portfólio Nuvetec.">
+  <title>MasterCar Oficina & Diagnóstico — Auto Center & Rastreador de OS por Placa</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Domine:wght@400;600;700&family=Dosis:wght@600;700;800&family=JetBrains+Mono:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+  <a href="#conteudo-principal" class="skip-link">Pular para o conteúdo principal</a>
+
+  <!-- Ponto de Montagem da Barra Lateral Retrátil (Glass Side Bar) -->
+  <div id="sidebar-mount"></div>
+
+  <div class="app-main-wrapper">
+    <!-- Faixa Superior de Aviso de Portfólio e Emergência -->
+    <div style="background: rgba(234, 88, 12, 0.14); border-bottom: 1px solid var(--border-glass); padding: 10px 28px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px;">
+      <div>
+        <strong style="color: var(--primary); text-transform: uppercase; font-size: 0.82rem; letter-spacing: 0.04em;">
+          Portfólio Oficial Nuvetec • Layout 02/05 (Glass Side Bar)
+        </strong>
+        <span style="font-size: 0.88rem; color: var(--text-body); margin-left: 8px;">
+          Demonstração para Oficinas Mecânicas & Auto Centers (Dados Fictícios)
+        </span>
+      </div>
+      <div style="display: flex; align-items: center; gap: 12px;">
+        <a href="#box-agendamento" id="btn-topo-guincho" class="btn btn-sos" style="min-height: 36px; padding: 6px 14px; font-size: 0.88rem;">
+          <span aria-hidden="true">🚨</span> Carro Enguiçado? Chamar Guincho Box
+        </a>
+      </div>
+    </div>
+
+    <main id="conteudo-principal" class="content-container">
+      <!-- Hero Interativo: Rastreador Ao Vivo de Ordem de Serviço por Placa -->
+      <section id="rastreador-os" class="os-tracker-hero" aria-labelledby="hero-os-title">
+        <div>
+          <span class="hero-tag-pill">
+            <span aria-hidden="true">🔬</span> Diagnóstico Computadorizado Bosch & Laudo em Vídeo
+          </span>
+          <h1 id="hero-os-title" class="hero-main-title">
+            Sua mecânica de confiança com transparência ao vivo pela placa.
+          </h1>
+          <p class="hero-serif-desc">
+            Nada de peças trocadas sem autorização. Na MasterCar você acompanha o progresso do seu veículo no elevador em tempo real e aprova o orçamento prévio detalhado (Art. 40 do CDC) direto pelo celular.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: 12px;">
+            <a href="#catalogo-servicos" class="btn btn-primary">
+              Ver Tabela de Revisão & Preços
+            </a>
+            <a href="/painel.html" class="btn btn-outline">
+              Testar Painel do Chefe de Oficina
+            </a>
+          </div>
+        </div>
+
+        <!-- Painel de Consulta de Ordem de Serviço por Placa Mercosul -->
+        <div class="tracker-panel" role="region" aria-labelledby="tracker-title">
+          <div style="display: flex; justify-content: space-between; align-items: center;">
+            <h2 id="tracker-title" style="font-size: 1.3rem; font-weight: 800;">
+              <span aria-hidden="true">📡</span> Rastreador de Ordem de Serviço (OS)
+            </h2>
+            <span style="font-family: var(--font-mono); font-size: 0.75rem; color: var(--success);">● ONLINE</span>
+          </div>
+          <p style="font-size: 0.9rem; color: var(--text-muted); margin-top: 4px;">
+            Digite a placa do veículo ou clique em uma placa demonstrativa abaixo:
+          </p>
+
+          <form id="form-consulta-placa" class="mercosul-input-row" novalidate>
+            <label for="input-placa-os" class="skip-link">Placa do veículo ou número da OS</label>
+            <input
+              type="text"
+              id="input-placa-os"
+              class="mercosul-plate-input"
+              value="BRA2E19"
+              maxlength="14"
+              placeholder="Ex: BRA2E19"
+              required
+            >
+            <button type="submit" class="btn btn-primary">
+              Consultar Box
+            </button>
+          </form>
+
+          <div class="demo-plates-bar">
+            <span style="font-size: 0.8rem; color: var(--text-muted); font-weight: 700;">Placas Demo no Elevador:</span>
+            <button type="button" class="plate-chip" data-placa="BRA2E19">BRA2E19 (T-Cross)</button>
+            <button type="button" class="plate-chip" data-placa="QXZ4G88">QXZ4G88 (Civic)</button>
+            <button type="button" class="plate-chip" data-placa="FSP9A12">FSP9A12 (Renegade)</button>
+          </div>
+
+          <div id="os-resultado-container" aria-live="polite">
+            <!-- Status da OS renderizado via index.js -->
+          </div>
+        </div>
+      </section>
+
+      <!-- Faixa de Confiança Avada (Trust Strip 4 Pilares da Oficina) -->
+      <section class="avada-trust-strip" aria-label="Garantia e Padrões de Oficina MasterCar">
+        <div class="trust-strip-grid">
+          <div class="trust-strip-item">
+            <div class="trust-strip-icon" aria-hidden="true">🔬</div>
+            <div class="trust-strip-content">
+              <strong>Diagnóstico Bosch Original</strong>
+              <span>Scanner OBD-II e osciloscópio digital</span>
+            </div>
+          </div>
+          <div class="trust-strip-item">
+            <div class="trust-strip-icon" aria-hidden="true">📹</div>
+            <div class="trust-strip-content">
+              <strong>Laudo em Vídeo no WhatsApp</strong>
+              <span>Aprovação prévia antes de qualquer troca (Art. 40 CDC)</span>
+            </div>
+          </div>
+          <div class="trust-strip-item">
+            <div class="trust-strip-icon" aria-hidden="true">🛡️</div>
+            <div class="trust-strip-content">
+              <strong>12 Meses de Garantia</strong>
+              <span>Peças genuínas de reposição com NF</span>
+            </div>
+          </div>
+          <div class="trust-strip-item">
+            <div class="trust-strip-icon" aria-hidden="true">🚨</div>
+            <div class="trust-strip-content">
+              <strong>Socorro Guincho Leva & Traz</strong>
+              <span>Resgate rápido para carros sem partida</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Seção Principal: Catálogo de Serviços + Calculadora de Orçamento & Agendamento -->
+      <section id="catalogo-servicos" class="services-layout" aria-label="Serviços da Oficina e Orçamento Preventivo">
+        <div>
+          <div style="display: flex; justify-content: space-between; align-items: baseline; flex-wrap: wrap; gap: 12px; margin-bottom: 16px;">
+            <h2 style="font-size: 1.85rem; font-weight: 800;">Tabela de Serviços & Revisão Preventiva</h2>
+            <span id="contador-servicos" style="color: var(--text-muted); font-weight: 700;" aria-live="polite">Carregando serviços...</span>
+          </div>
+
+          <div class="category-pills" role="group" aria-label="Filtrar serviços por especialidade">
+            <button type="button" class="cat-pill active" data-cat="Todas" aria-pressed="true">Todas as Especialidades</button>
+            <button type="button" class="cat-pill" data-cat="Revisão Preventiva" aria-pressed="false">Revisão Preventiva</button>
+            <button type="button" class="cat-pill" data-cat="Freios & Suspensão" aria-pressed="false">Freios & Suspensão</button>
+            <button type="button" class="cat-pill" data-cat="Injeção & Diagnóstico" aria-pressed="false">Injeção & Scanner OBD2</button>
+            <button type="button" class="cat-pill" data-cat="Câmbio & Motor" aria-pressed="false">Câmbio Automático</button>
+            <button type="button" class="cat-pill" data-cat="Ar-Condicionado" aria-pressed="false">Ar-Condicionado</button>
+          </div>
+
+          <div id="servicos-grid" class="services-grid" aria-live="polite">
+            <!-- Renderizado via index.js -->
+          </div>
+        </div>
+
+        <!-- Coluna Sticky: Calculadora de Orçamento Prévio + Agendamento de Box / Guincho -->
+        <aside id="box-agendamento" class="booking-sticky-card" aria-labelledby="booking-title">
+          <h2 id="booking-title" style="font-size: 1.4rem; font-weight: 800; margin-bottom: 6px;">
+            Orçamento Prévio & Reserva de Elevador
+          </h2>
+          <p style="font-family: var(--font-serif); font-size: 0.88rem; color: var(--text-muted); margin-bottom: 16px;">
+            Simule o valor conforme o porte do seu carro e gere seu protocolo de atendimento imediato.
+          </p>
+
+          <form id="form-agendamento-mastercar" novalidate>
+            <!-- Honeypot Anti-Bot -->
+            <div style="display: none;" aria-hidden="true">
+              <label for="oficina_website_honeypot">Não preencha</label>
+              <input type="text" id="oficina_website_honeypot" tabindex="-1" autocomplete="off">
+            </div>
+
+            <div class="form-group">
+              <label for="ag-tipo" class="form-label">Tipo de Atendimento</label>
+              <select id="ag-tipo" class="form-select">
+                <option value="Agendamento Oficina">Agendar Horário na Oficina</option>
+                <option value="Socorro Guincho Urgente">🚨 Solicitar Socorro / Guincho Urgente</option>
+                <option value="Orçamento Preventivo">Apenas Orçamento Prévio no WhatsApp</option>
+              </select>
+            </div>
+
+            <div class="form-group">
+              <label for="ag-servico" class="form-label">Serviço Principal Desejado</label>
+              <select id="ag-servico" class="form-select"></select>
+            </div>
+
+            <div class="form-group">
+              <label for="ag-porte" class="form-label">Porte do Veículo</label>
+              <select id="ag-porte" class="form-select">
+                <option value="Leve (Hatch/Sedan)">Passeio Leve (Hatch / Sedan)</option>
+                <option value="SUV / Utilitário">SUV / Crossover (+22% insumos)</option>
+                <option value="Picape / Diesel">Picape / Motor Diesel (+45% insumos)</option>
+              </select>
+            </div>
+
+            <div id="box-calculo-orcamento" style="background: rgba(56, 189, 248, 0.12); border-left: 4px solid var(--accent-obd); padding: 12px 14px; border-radius: var(--radius-sm); margin-bottom: 16px;" aria-live="polite">
+              Calculando estimativa...
+            </div>
+
+            <div class="form-group">
+              <label for="ag-nome" class="form-label">Seu Nome Completo *</label>
+              <input type="text" id="ag-nome" class="form-input" placeholder="Ex: Renato Augusto" required>
+            </div>
+
+            <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+              <div class="form-group">
+                <label for="ag-telefone" class="form-label">WhatsApp *</label>
+                <input type="tel" id="ag-telefone" class="form-input" placeholder="(11) 98888-1122" required>
+              </div>
+              <div class="form-group">
+                <label for="ag-placa" class="form-label">Placa (Opcional)</label>
+                <input type="text" id="ag-placa" class="form-input" placeholder="BRA2E19">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="ag-modelo" class="form-label">Modelo e Ano do Carro *</label>
+              <input type="text" id="ag-modelo" class="form-input" placeholder="Ex: Honda HR-V EXL 2021" required>
+            </div>
+
+            <div class="form-group">
+              <label for="ag-sintomas" class="form-label">Sintoma ou Observação (Opcional)</label>
+              <input type="text" id="ag-sintomas" class="form-input" placeholder="Ex: Luz de injeção acesa ou barulho ao frear">
+            </div>
+
+            <div class="form-group" style="font-size: 0.82rem; color: var(--text-body);">
+              <label style="display: flex; align-items: flex-start; gap: 8px; cursor: pointer;">
+                <input type="checkbox" id="ag-lgpd" style="margin-top: 4px;" required>
+                <span>
+                  Concordo com o tratamento dos dados informados para geração de protocolo de atendimento conforme a <a href="/termos.html" style="color: var(--accent-obd); font-weight: 700;">Política LGPD</a> (Dados fictícios demonstrativos).
+                </span>
+              </label>
+            </div>
+
+            <div id="ag-feedback" aria-live="polite" style="margin-bottom: 12px;"></div>
+
+            <button type="submit" id="btn-enviar-agendamento" class="btn btn-primary" style="width: 100%;">
+              Gerar Protocolo e Reservar Box
+            </button>
+          </form>
+        </aside>
+      </section>
+    </main>
+
+    <!-- Rodapé com Aviso Explícito de Dados Fictícios + Transparência Fiscal CDC -->
+    <footer class="site-footer">
+      <div class="content-container" style="padding: 0;">
+        <div class="fictional-box" role="alert">
+          <strong style="color: var(--primary); font-size: 1.05rem; display: block; margin-bottom: 4px;">
+            ⚠️ AVISO DE DEMONSTRAÇÃO DE PORTFÓLIO (DADOS FICTÍCIOS)
+          </strong>
+          <p style="font-family: var(--font-serif); font-size: 0.92rem; color: var(--text-body);">
+            Este site (<strong>MasterCar Oficina & Diagnóstico</strong>) foi desenvolvido pela <strong>Nuvetec</strong> como peça de demonstração tecnológica para oficinas mecânicas e centros automotivos. Todas as ordens de serviço, placas, preços, CNPJ e endereço são <strong>100% fictícios</strong>.
+          </p>
+        </div>
+
+        <div class="footer-cols">
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">MasterCar Oficina & Diagnóstico</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+              Razão Social Fictícia: MasterCar Serviços de Manutenção Automotiva Ltda.<br>
+              CNPJ Demonstrativo: 32.654.987/0001-12<br>
+              Endereço Fictício: Rua Guaicurus, 1180 — Lapa, São Paulo/SP — CEP 05033-002
+            </p>
+          </div>
+
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">Conformidade Legal & CDC</h3>
+            <ul style="list-style: none; font-size: 0.9rem;">
+              <li><a href="/termos.html" style="color: var(--accent-obd);">Orçamento Prévio Obrigatório (Art. 40 CDC)</a></li>
+              <li><a href="/termos.html" style="color: var(--accent-obd);">Garantia Legal de Peças e Serviços</a></li>
+              <li><a href="/termos.html" style="color: var(--accent-obd);">Política de Privacidade e Direitos LGPD</a></li>
+            </ul>
+          </div>
+
+          <div>
+            <h3 style="font-size: 1.15rem; font-weight: 800; margin-bottom: 8px;">Suporte & DPO</h3>
+            <p style="font-size: 0.9rem; color: var(--text-muted);">
+              Central Oficina (Fictícia): (11) 3872-0011 / (11) 98888-1111<br>
+              Encarregado de Dados (DPO): Eng. Marcos Viana — dpo@mastercar-demo.com.br<br>
+              © 2026 MasterCar • Engenharia <strong>Nuvetec</strong>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script type="module" src="/js/sidebar.js"></script>
+  <script type="module" src="/js/index.js"></script>
+</body>
+</html>

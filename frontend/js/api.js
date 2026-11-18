@@ -34,7 +34,52 @@ export function limparSessao() {
   localStorage.removeItem(USER_KEY);
 }
 
+async function staticDemoFetch(endpoint, options = {}) {
+  const { DEMO_DATA } = await import('./demo-data.js');
+  const url = new URL(endpoint, 'https://demo.local');
+  const path = url.pathname;
+  const body = options.body ? JSON.parse(options.body) : {};
+
+  if (path === '/api/servicos') {
+    const cat = url.searchParams.get('categoria');
+    return cat ? DEMO_DATA.servicos.filter(s => s.categoria === cat) : [...DEMO_DATA.servicos];
+  }
+
+  if (path === '/api/ordens/consulta') {
+    const placa = (url.searchParams.get('placa') || '').replace(/[^A-Z0-9]/gi, '').toUpperCase();
+    const os = DEMO_DATA.ordens.find(o => o.placa_veiculo === placa || o.protocolo_os === placa);
+    if (!os) throw new Error('Ordem de serviço não encontrada para a placa informada.');
+    return os;
+  }
+
+  if (path === '/api/servicos/orcamento') {
+    const srv = DEMO_DATA.servicos.find(s => s.id === Number(body.servico_id)) || DEMO_DATA.servicos[0];
+    const mult = body.porte_veiculo?.includes('SUV') ? 1.22 : (body.porte_veiculo?.includes('Picape') ? 1.38 : 1);
+    return {
+      porte_veiculo: body.porte_veiculo || 'Leve (Hatch/Sedan)',
+      valor_estimado: Number((srv.preco_base * mult).toFixed(2)),
+      servico: srv
+    };
+  }
+
+  if (path === '/api/agendamentos') {
+    const orc = await staticDemoFetch('/api/servicos/orcamento', { body: JSON.stringify(body) });
+    const protocolo = `MTC-DEMO-${Math.floor(1000 + Math.random() * 9000)}`;
+    return {
+      protocolo,
+      valor_estimado: orc.valor_estimado,
+      whatsapp_url: `https://wa.me/5551999990000?text=${encodeURIComponent(`Olá! Agendamento MasterCar (${protocolo})`)}`
+    };
+  }
+
+  return {};
+}
+
 export async function apiFetch(endpoint, options = {}) {
+  if (typeof window !== 'undefined' && window.location.hostname.endsWith('github.io')) {
+    return staticDemoFetch(endpoint, options);
+  }
+
   const token = obterToken();
   const headers = {
     'Content-Type': 'application/json',

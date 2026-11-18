@@ -38,7 +38,7 @@ function montarSidebar() {
     <aside id="glassSidebar" class="glass-sidebar ${isPinned ? 'is-pinned' : ''}" aria-label="Menu Lateral Retrátil MasterCar">
       <div>
         <div class="sidebar-top">
-          <a href="/index.html" class="sidebar-brand" title="MasterCar Oficina & Diagnóstico">
+          <a href="./index.html" class="sidebar-brand" title="MasterCar Oficina & Diagnóstico">
             <div class="sidebar-logo-badge" aria-hidden="true">🔧</div>
             <div class="sidebar-brand-title">
               <strong style="font-size: 1.3rem; display: block; line-height: 1;">MasterCar</strong>
@@ -52,31 +52,31 @@ function montarSidebar() {
 
         <ul class="sidebar-nav">
           <li>
-            <a href="/index.html#rastreador-os" class="sidebar-link ${path.endsWith('index.html') || path === '/' ? 'active' : ''}" title="Rastrear Ordem de Serviço por Placa">
+            <a href="./index.html#rastreador-os" class="sidebar-link ${path.endsWith('index.html') || path === '/' ? 'active' : ''}" title="Rastrear Ordem de Serviço por Placa">
               <span class="sidebar-icon" aria-hidden="true">📡</span>
               <span class="sidebar-label">Rastrear OS por Placa</span>
             </a>
           </li>
           <li>
-            <a href="/index.html#catalogo-servicos" class="sidebar-link" title="Tabela de Serviços e Revisão">
+            <a href="./index.html#catalogo-servicos" class="sidebar-link" title="Tabela de Serviços e Revisão">
               <span class="sidebar-icon" aria-hidden="true">⚙️</span>
               <span class="sidebar-label">Serviços & Revisão</span>
             </a>
           </li>
           <li>
-            <a href="/index.html#box-agendamento" class="sidebar-link" title="Simular Orçamento e Agendar">
+            <a href="./index.html#box-agendamento" class="sidebar-link" title="Simular Orçamento e Agendar">
               <span class="sidebar-icon" aria-hidden="true">📅</span>
               <span class="sidebar-label">Orçamento & Guincho</span>
             </a>
           </li>
           <li>
-            <a href="/painel.html" class="sidebar-link ${path.includes('painel.html') ? 'active' : ''}" title="Painel do Chefe de Oficina">
+            <a href="./painel.html" class="sidebar-link ${path.includes('painel.html') ? 'active' : ''}" title="Painel do Chefe de Oficina">
               <span class="sidebar-icon" aria-hidden="true">🔐</span>
               <span class="sidebar-label">Painel da Oficina</span>
             </a>
           </li>
           <li>
-            <a href="/termos.html" class="sidebar-link ${path.includes('termos.html') ? 'active' : ''}" title="Garantia CDC & Privacidade LGPD">
+            <a href="./termos.html" class="sidebar-link ${path.includes('termos.html') ? 'active' : ''}" title="Garantia CDC & Privacidade LGPD">
               <span class="sidebar-icon" aria-hidden="true">🛡️</span>
               <span class="sidebar-label">Garantia CDC & LGPD</span>
             </a>
@@ -90,7 +90,7 @@ function montarSidebar() {
           <span class="sidebar-label">Alternar Tema Visual</span>
         </button>
 
-        <a href="/painel.html" class="sidebar-link" title="Perfil da Conta">
+        <a href="./painel.html" class="sidebar-link" title="Perfil da Conta">
           <span class="sidebar-icon" style="background: var(--accent-obd); color: #0B0F19; border-radius: 50%; width: 32px; height: 32px; display: inline-flex; align-items: center; justify-content: center; font-weight: 800; font-size: 0.85rem;">
             ${iniciais}
           </span>
@@ -132,7 +132,7 @@ function montarCookieBanner() {
       <div style="max-width: 64ch;">
         <strong style="display: block; font-size: 1rem;">🍪 Privacidade e Cookies MasterCar (LGPD)</strong>
         <p style="font-size: 0.88rem; color: var(--text-body);">
-          Usamos armazenamento local estritamente para salvar suas preferências de tema (Dark/Light), barra lateral e sessão autenticada. Veja nossos <a href="/termos.html" style="color: var(--accent-obd); font-weight: 700;">Termos e Direitos LGPD</a>.
+          Usamos armazenamento local estritamente para salvar suas preferências de tema (Dark/Light), barra lateral e sessão autenticada. Veja nossos <a href="./termos.html" style="color: var(--accent-obd); font-weight: 700;">Termos e Direitos LGPD</a>.
         </p>
       </div>
       <div style="display: flex; gap: 10px;">
